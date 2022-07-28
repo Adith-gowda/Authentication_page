@@ -1,8 +1,8 @@
 var signinHtml = `
 <div>
   <h1>Login</h1>
-  <form method="POST" action="">
-    <div class="text_field">
+  <form>
+  <div class="text_field">
       <input type="text" name="email" required />
       <span></span>
       <label>Email</label>
@@ -13,45 +13,43 @@ var signinHtml = `
       <label>Password</label>
     </div>
     <input type="submit" name="submit" value="Sign in" />
-  </form>
+    </form>
 </div>
 `;
 
-  var signupHtml = `
+var signupHtml = `
   <div>
     <h1>Register</h1>
-    <form method="POST" action="">
+    <form>
       <div class="text_field">
-        <input type="text" name="name" required />
-        <span></span>
+      <input type="text" name="name" required />
+      <span></span>
         <label>Name</label>
-      </div>
-      <div class="text_field">
+        </div>
+        <div class="text_field">
         <input type="text" name="email" required />
         <span></span>
         <label>Email</label>
       </div>
       <div class="text_field">
-        <input type="password" name="password" required />
-        <span></span>
-        <label>Password</label>
+      <input type="password" name="password" required />
+      <span></span>
+      <label>Password</label>
       </div>
       <div class="text_field">
-        <input type="password" name="confirm_password" required />
-        <span></span>
-        <label>Confirm Password</label>
+      <input type="password" name="confirm_password" required />
+      <span></span>
+      <label>Confirm Password</label>
       </div>
       <div class="text_field">
-        <input type="text" name="phone" required />
+      <input type="text" name="phone" required />
         <span></span>
         <label>Phone</label>
-      </div>
-      <input type="submit" name="submit" value="Sign Up" />
-    </form>
-</div>
+        </div>
+        <input type="submit" name="submit" value="Sign Up" />
+        </form>
+        </div>
 `;
-
-
 
 const divId = document.getElementById("divId");
 
@@ -63,6 +61,25 @@ container.innerHTML = signinHtml;
 
 divId.innerHTML = `<p>Don't have an account? <p>Sign up</p></p>`;
 
+let form = document.querySelector("form");
+
+function saveToDatabase(data){
+  // save to database
+  // fetch("http://localhost:3000/users")
+}
+
+function addEventListener(){
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+    console.log(data);
+    saveToDatabase(data);
+  })
+}
+
+addEventListener();
+
 divId.addEventListener("click", () => {
   if (isLogin) {
     container.innerHTML = signupHtml;
@@ -73,5 +90,7 @@ divId.addEventListener("click", () => {
     isLogin = true;
     divId.innerHTML = `<p>Don't have an account? <p>Sign up</p></p>`;
   }
+  form = document.querySelector("form");
+  addEventListener();
 });
 
